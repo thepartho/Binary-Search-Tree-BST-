@@ -6,8 +6,7 @@ struct Node {
     int key;
     Node* left;
     Node* right;
-
-    Node(int k) : key(k), left(nullptr), right(nullptr) {}
+Node(int k) : key(k), left(nullptr), right(nullptr) {}
 };
 
 // --------- BST OPERATIONS ---------
@@ -16,8 +15,7 @@ struct Node {
 Node* search(Node* root, int key) {
     if (root == nullptr || root->key == key)
         return root;
-
-    if (key < root->key)
+   if (key < root->key)
         return search(root->left, key);
     else
         return search(root->right, key);
@@ -29,7 +27,7 @@ Node* insert(Node* root, int key) {
         return new Node(key);
     }
 
-    if (key < root->key)
+  if (key < root->key)
         root->left = insert(root->left, key);
     else if (key > root->key)
         root->right = insert(root->right, key);
@@ -46,16 +44,16 @@ Node* findMin(Node* root) {
 
 // Delete key from BST (recursive)
 Node* deleteNode(Node* root, int key) {
-    if (root == nullptr) return root;
+if (root == nullptr) return root;
 
-    if (key < root->key) {
+if (key < root->key) {
         root->left = deleteNode(root->left, key);
     } else if (key > root->key) {
         root->right = deleteNode(root->right, key);
     } else {
         // node to be deleted found
 
-        // Case 1: no child or only right child
+// Case 1: no child or only right child
         if (root->left == nullptr) {
             Node* temp = root->right;
             delete root;
@@ -68,7 +66,7 @@ Node* deleteNode(Node* root, int key) {
             return temp;
         }
 
-        // Case 3: two children
+ // Case 3: two children
         Node* temp = findMin(root->right);
         root->key = temp->key; // copy value
         // Delete the inorder successor
@@ -88,17 +86,17 @@ void inorder(Node* root) {
 int main() {
     Node* root = nullptr;
 
-    // Insert some values
+// Insert some values
     int values[] = {50, 30, 70, 20, 40, 60, 80};
     for (int x : values) {
         root = insert(root, x);
     }
 
-    cout << "Inorder traversal (initial): ";
+cout << "Inorder traversal (initial): ";
     inorder(root);
     cout << endl;
 
-    // Search for a key
+// Search for a key
     int keyToSearch = 40;
     Node* result = search(root, keyToSearch);
     if (result != nullptr)
@@ -106,12 +104,12 @@ int main() {
     else
         cout << "Key " << keyToSearch << " not found" << endl;
 
-    // Delete a key
+// Delete a key
     int keyToDelete = 30;
     root = deleteNode(root, keyToDelete);
     cout << "Inorder traversal after deleting " << keyToDelete << ": ";
     inorder(root);
     cout << endl;
 
-    return 0;
+  return 0;
 }
